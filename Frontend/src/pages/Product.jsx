@@ -6,7 +6,7 @@ import RelatedProducts from "../components/RelatedProducts";
 
 const Product = () => {
   const { productId } = useParams();
-  const { products, currency } = useContext(ShopContext);
+  const { products, currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(null);
   const [image, setImage] = useState("");
   const [reviewCount, setReviewCount] = useState(0);
@@ -91,7 +91,7 @@ const Product = () => {
               ))}
             </div>
             <div className="flex gap-2 my-5">
-              <button
+              <button onClick={() => addToCart(productData._id, selectedSize)}
                 className="border border-gray-400 bg-black text-white px-6 py-2 hover:transform hover:scale-102 transition ease-in-out duration-300"
               >
                 Add to Cart

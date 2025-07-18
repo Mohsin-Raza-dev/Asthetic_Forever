@@ -5,7 +5,7 @@ import { ShopContext } from '../context/ShopContext';
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
   
-  const {setShowSearch} = useContext(ShopContext);
+  const {setShowSearch, cartQuantity} = useContext(ShopContext);
 
 const toggleMenu = () => {
     if (!visible) {
@@ -76,7 +76,7 @@ const toggleMenu = () => {
             alt="cart's icon"
           />
           <p className="absolute right-[-5px] bottom-[-5px] w-4 h-4 text-xs flex items-center justify-center text-white bg-black rounded-full">
-            10
+            {cartQuantity()}
           </p>
         </Link>
         <img
