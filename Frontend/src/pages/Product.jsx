@@ -91,12 +91,11 @@ const Product = () => {
               ))}
             </div>
             <div className="flex gap-2 my-5">
-              <Link
+              <button
                 className="border border-gray-400 bg-black text-white px-6 py-2 hover:transform hover:scale-102 transition ease-in-out duration-300"
-                to={`/cart/${productId}`}
               >
                 Add to Cart
-              </Link>
+              </button>
             </div>
             <div className="flex flex-col">
               <hr className="w-3/4 sm:w-4/5 border-none h-[1px] bg-gray-300" />
@@ -126,14 +125,19 @@ const Product = () => {
             Perspiciatis corporis reiciendis rem?
           </p>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi quo iusto laudantium dolor sed officiis animi reprehenderit rerum reiciendis nobis architecto quisquam voluptatibus incidunt, asperiores perferendis iste repellat autem fugit!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
+            quo iusto laudantium dolor sed officiis animi reprehenderit rerum
+            reiciendis nobis architecto quisquam voluptatibus incidunt,
+            asperiores perferendis iste repellat autem fugit!
           </p>
         </div>
       </div>
 
       {/* ------------- Related Products Section -------------- */}
-      <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
-      
+      <RelatedProducts
+        category={productData.category}
+        subCategory={productData.subCategory}
+      />
     </div>
   ) : (
     <div className="py-10 text-center text-gray-500 text-xl">Loading...</div>

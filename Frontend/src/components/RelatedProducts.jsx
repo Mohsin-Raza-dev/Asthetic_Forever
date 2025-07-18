@@ -4,7 +4,7 @@ import Title from './Title';
 import ProductItem from './ProductItem';
 
 const RelatedProducts = ({category, subCategory}) => {
-    const { products, currency } = useContext(ShopContext);
+    const { products } = useContext(ShopContext);
     const [relatedProducts, setRelatedProducts] = useState([]);
 
     useEffect(() => {
@@ -23,13 +23,14 @@ const RelatedProducts = ({category, subCategory}) => {
           </div>
           <div className=' mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6'>
               {relatedProducts.map((item, index) => {
+                  return(
                   <ProductItem
                       key={index}
                       id={item._id}
                       image={item.image}
                       name={item.name}
                       price={item.price} />
-              })}
+              )})}
               
           </div>
     </div>
