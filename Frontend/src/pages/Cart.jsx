@@ -3,7 +3,7 @@ import Title from '../components/Title'
 import { ShopContext } from '../context/ShopContext'
 import { MdDeleteForever } from "react-icons/md";
 import CartTotal from '../components/CartTotal';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Cart = () => {
@@ -62,18 +62,18 @@ const Cart = () => {
   return (
     <div className="border-t pt-14">
       {cartData.length === 0 ? (
-          <div className="flex flex-col items-center justify-center min-h-[300px] text-center text-gray-500">
-            <p className="text-xl font-semibold mb-2">Your cart is empty</p>
-            <p className="text-sm text-gray-400">
-              Looks like you haven’t added anything yet.
-            </p>
-            <button
-              onClick={() => navigate("/collection")}
-              className="mt-4 px-4 py-2 border border-gray-300 rounded hover:bg-black hover:text-white transition"
-            >
-              Continue Shopping
-            </button>
-          </div>
+        <div className="flex flex-col items-center justify-center min-h-[300px] text-center text-gray-500">
+          <p className="text-xl font-semibold mb-2">Your cart is empty</p>
+          <p className="text-sm text-gray-400">
+            Looks like you haven’t added anything yet.
+          </p>
+          <button
+            onClick={() => navigate("/collection")}
+            className="mt-4 px-4 py-2 border border-gray-300 rounded hover:bg-black hover:text-white transition"
+          >
+            Continue Shopping
+          </button>
+        </div>
       ) : (
         <>
           <div className="text-2xl mb-3">
@@ -136,8 +136,16 @@ const Cart = () => {
               );
             })}
           </div>
-          <div className="flex justify-end mt-10">
+          <div className="flex flex-col w-full sm:w-1/2 mt-10 ml-auto space-y-4">
             <CartTotal />
+            <div className='mt-6 flex justify-end'>
+              <Link
+                to="/place-order"
+                className="text-center bg-black text-white py-2 px-6 hover:opacity-90 transition rounded"
+              >
+                Proceed to Checkout
+              </Link>
+            </div>
           </div>
         </>
       )}

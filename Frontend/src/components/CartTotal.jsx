@@ -1,6 +1,7 @@
 import React, { useContext, useMemo } from "react";
 import Title from "./Title";
 import { ShopContext } from "../context/ShopContext";
+import { Link } from "react-router-dom";
 
 const CartTotal = () => {
   const { cartItems, products, deliver_fee, currency } =
@@ -24,7 +25,7 @@ const CartTotal = () => {
   const total = subtotal + shipping;
 
     return subtotal > 0 ? (
-                  <div className="flex flex-col justify-end mt-14 w-1/3">
+                  <div className="flex flex-col justify-end mt-14 ">
       <div className="flex text-xl sm:text-2xl font-semibold">
         <Title text1="CART" text2="TOTAL" />
       </div>
@@ -38,7 +39,7 @@ const CartTotal = () => {
           </p>
         </div>
 
-        <div className="flex justify-between border-t border-gray-400">
+        <div className="flex justify-between border-t border-gray-300">
           <p className="text-gray-700 mt-2">Shipping</p>
           <p className="text-gray-600 mt-2">
             {currency}
@@ -46,17 +47,14 @@ const CartTotal = () => {
           </p>
         </div>
 
-        <div className="flex justify-between border-t border-gray-400">
+        <div className="flex justify-between border-t border-gray-300">
           <p className="text-gray-700 font-medium mt-2">Total</p>
           <p className="text-gray-600 mt-2 font-medium">
             {currency}
             {total.toFixed(2)}
           </p>
         </div>
-      </div>
-      <button className="mt-6 bg-black text-white py-2 px-6 hover:opacity-90 transition">
-        Proceed to Checkout
-      </button>
+      </div> 
     </div>
     ) : null;
 };
