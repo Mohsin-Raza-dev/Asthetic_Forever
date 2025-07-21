@@ -1,6 +1,7 @@
 import {useState, useEffect, useContext} from 'react'
 import Title from '../components/Title'
 import { ShopContext } from '../context/ShopContext'
+import { MdDeleteForever } from "react-icons/md";
 
 
 const Cart = () => {
@@ -22,25 +23,38 @@ const Cart = () => {
     
     setCartData(tempData);
 
-  },[cartItems])
-  
-  const increment = (id, size) => {
-    const updated = {...cartItems}
-    updated[id][size] += 1;
-    setCartItems(updated);
-  }
-  const decrement = (id, size) => {
-    const updated = { ...cartItems }
-    if (updated[id][size]) {
-      updated[id][size] -= 1;
-    } else {
-      delete updated[id][size];
-      if (Object.keys(updated[id]).length === 0) {
-        delete updated[id];
-      }
+  }, [cartItems])
+
+  const handleQuantityChange = (id, size, quantity) => {
+    const qty = parseInt(quantity);
+
+    if (isNaN(qty) || qty < 0) return;
+
+    setCartItems((prevItems) => {
+      const updated = { ...prevItems };
+
+      if (!updated[id]) updated[id] = {};
+
+      updated[id][size] = qty;
+
+      return updated;
+    });
+  };
+
+  const handleDeleteItem = (id, size) => {
+    const updated = { ...cartItems };
+
+    delete updated[id][size];
+
+    if (Object.keys(updated[id]).length === 0) {
+      delete updated[id];
     }
+
     setCartItems(updated);
-  }
+  };
+  
+  
+  
   return (
     <div className='border-t pt-14'>
       <div className='text-2xl mb-3'>
@@ -80,26 +94,27 @@ const Cart = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => decrement(item.id, item.size)}
-                    className="border border-gray-300 px-3 py-1"
-                  >
-                    -
-                  </button>
-                  <p>{item.quantity}</p>
-                  <button
-                    onClick={() => increment(item.id, item.size)}
-                    className="border border-gray-300 px-3 py-1"
-                  >
-                    +
-                  </button>
+                <div className="flex items-center gap-8">
+                  <input
+                    className="max-w-10 sm:max-w-20 px-1 sm:px-2 py-1 border border-gray-300 bg-gray-50"
+                    type="number"
+                    defaultValue={item.quantity}
+                    min={0}
+                    max={100}
+                    onChange={(e) =>
+                      handleQuantityChange(item.id, item.size, e.target.value)
+                    }
+                  />
+                  <MdDeleteForever className='cursor-pointer w-4 sm:w-6 h-4 sm:h-6 hover:text-red-500' onClick={() => handleDeleteItem(item.id, item.size, item.quantity)} />
                 </div>
               </div>
             );
           })
         }
 
+      </div>
+      <div className='text-2xl mb-3 pt-14 flex flex-col flex-end'>
+        <Title text1={"CART"} text2={"TOTAL"} />
       </div>
     </div>
   );

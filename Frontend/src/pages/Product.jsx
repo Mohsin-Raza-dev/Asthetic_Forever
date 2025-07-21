@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
 import RelatedProducts from "../components/RelatedProducts";
+import { toast } from "react-toastify";
 
 const Product = () => {
   const { productId } = useParams();
@@ -11,6 +12,17 @@ const Product = () => {
   const [image, setImage] = useState("");
   const [reviewCount, setReviewCount] = useState(0);
   const [selectedSize, setSelectedSize] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
+
+  const handleAdd = async () => {
+    if (!selectedSize) {
+      toast.error("Please select a size");
+      return;
+    }
+    setIsAdding(true);
+    await addToCart(productData._id, selectedSize);
+    setTimeout(() => setIsAdding(false), 1000); // Reset text after 1s
+  };
 
   useEffect(() => {
     const product = products.find((item) => item._id.toString() === productId);
@@ -91,10 +103,11 @@ const Product = () => {
               ))}
             </div>
             <div className="flex gap-2 my-5">
-              <button onClick={() => addToCart(productData._id, selectedSize)}
-                className="border border-gray-400 bg-black text-white px-6 py-2 hover:transform hover:scale-102 transition ease-in-out duration-300"
+              <button
+                onClick={handleAdd}
+                className="w-40 text-center border border-gray-400 bg-black text-white px-6 py-2 active:scale-95 transition-all duration-150"
               >
-                Add to Cart
+                {isAdding ? "✓ Added!" : "Add to Cart"}
               </button>
             </div>
             <div className="flex flex-col">
