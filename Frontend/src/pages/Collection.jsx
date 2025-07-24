@@ -40,47 +40,37 @@ const Collection = () => {
     let filtered = products.slice();
 
     if (showSearch && search) {
-      filtered = filtered.filter((items) =>
-        items.name.toLowerCase().includes(search.toLowerCase())
+      filtered = filtered.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
       );
     }
 
     if (category.length > 0) {
-      filtered = filtered.filter((items) => category.includes(items.category));
+      filtered = filtered.filter((item) => category.includes(item.category));
     }
+
     if (subCategory.length > 0) {
-      filtered = filtered.filter((items) =>
-        subCategory.includes(items.subCategory)
+      filtered = filtered.filter((item) =>
+        subCategory.includes(item.subCategory)
       );
     }
-        setFilterProducts(filtered);
-  }, [products, search, showSearch, category, subCategory]);
 
-  const sortProduts = useCallback(() => {
-    let filtered = filteredProducts.slice();
-     
-    switch (sortOption) {
-      case "relevent":
-        break;
-      case "low-high":
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case "high-low":
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      default:
-        applyFilter();
-        break;
+  
+    if (sortOption === "low-high") {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (sortOption === "high-low") {
+      filtered.sort((a, b) => b.price - a.price);
     }
-  },[filteredProducts, sortOption, applyFilter])
+
+    setFilterProducts(filtered);
+  }, [products, search, showSearch, category, subCategory, sortOption]);
+
+
 
   useEffect(() => {
     applyFilter();
   }, [applyFilter])
 
-  useEffect(() => {
-    sortProduts();
-  }, [sortProduts])
 
 const handleSortChange = (e) => {
   setSortOption(e.target.value);
