@@ -34,9 +34,9 @@ const Footer = () => {
         <div>
           <p className="text-xl text-gray-700 font-medium mb-5">GET IN TOUCH</p>
           <ul className="flex flex-col gap-2 text-gray-500">
-            <Link>456 Fashion Ave, NY 10018, USA</Link>
-            <Link>+92 123 456 789</Link>
-            <Link>astheticforever@gmail.com</Link>
+            <p>456 Fashion Ave, NY 10018, USA</p>
+            <p>+92 123 456 789</p>
+            <p>astheticforever@gmail.com</p>
           </ul>
         </div>
       </div>
