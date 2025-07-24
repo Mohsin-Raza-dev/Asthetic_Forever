@@ -11,7 +11,7 @@ const PaymentMethod = () => {
   };
 
   return (
-    <div className="my-10">
+    <div className="my-10 pt-10">
       <div>
         <Title text1="PAYMENT" text2="METHOD" />
       </div>
@@ -55,7 +55,7 @@ const PaymentMethod = () => {
 
         {/* Cash on Delivery */}
         <label
-          className={`flex items-center gap-2 border px-4 py-3 cursor-pointer rounded ${
+          className={`flex items-center gap-2 border px-4 p-[10px] cursor-pointer rounded ${
             selectedMethod === "cod"
               ? "border-blue-500 bg-blue-50"
               : "border-gray-400"
@@ -64,11 +64,12 @@ const PaymentMethod = () => {
           <input
             type="radio"
             name="payment"
+            aria-label="Cash on Delivery"
             value="cod"
             checked={selectedMethod === "cod"}
             onChange={handleChange}
           />
-          <p className="text-gray-700 text-sm">Cash on Delivery</p>
+          <p className="text-gray-500 text-sm">Cash on Delivery</p>
         </label>
           </div>
           <div className="flex justify-end">
