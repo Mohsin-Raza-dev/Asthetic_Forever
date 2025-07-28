@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema(
             type: Array, required: true, 
         },
         date: {
-            type: Number, required: true, 
+            type: Date, required: true, 
         },
         bestseller: {
             type: Boolean, required: true, 
